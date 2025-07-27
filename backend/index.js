@@ -4,9 +4,16 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-
 const app = express();
-app.use(cors());
+
+// 🔒 Bezpečně povolit jen Vercel doménu:
+const corsOptions = {
+  origin: 'https://reas-form-puce.vercel.app', // tvá vercel URL
+  methods: ['GET', 'POST'],
+  credentials: true
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Připojení k MongoDB (nahraď URI vlastní)
