@@ -1,0 +1,13 @@
+.kraj {
+  fill: #e2e8f0;
+  stroke: #2d3748;
+  stroke-width: 1;
+  cursor: pointer;
+  transition: fill 0.2s ease;
+}
+.kraj:hover {
+  fill: #cbd5e0;
+}
+.kraj.active {
+  fill: #2563eb;
+}
