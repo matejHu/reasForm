@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+# 🏠 REAS Formulář pro sběr leadů
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Jednoduchá fullstack aplikace pro sběr kontaktů na zájemce o prodej nemovitostí. Aplikace obsahuje:
+- 🖼️ Frontend (React)
+- 🌐 Backend (Express.js + MongoDB)
+- 📦 Nasazení pomocí Dockeru (lokálně) nebo Vercel + Railway (online)
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🌍 Online verze
 
-### `npm start`
+- 🧾 **Frontend (Vercel):**  
+  https://reas-form-puce.vercel.app
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- ⚙️ **Backend (Railway):**  
+  https://reasform.up.railway.app
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🐳 Lokální spuštění přes Docker
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 🔧 Požadavky:
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/) (součástí novějších Docker verzí)
 
-### `npm run build`
+### 🛠️ Postup:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Naklonuj repozitář:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+git clone https://github.com/matejHu/reas-form.git
+cd reas-form
+Vytvoř .env soubor pro backend:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+env
+# ./backend/.env
+MONGODB_URI=mongodb+srv://<uzivatel>:<heslo>@cluster.mongodb.net/nabidky
+PORT=4000
+Spusť Docker:
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+docker compose up --build
+Otevři prohlížeč:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+http://localhost:4000
+Frontend i backend poběží v jednom kontejneru. API je dostupné na /lead.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Jak upravit a redeploynout
+Pokud změníš .env nebo kód:
+🔃 Na Railway:
+Přejdi do projektu na https://railway.app
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Klikni na Deploy → Redeploy – aby se aplikace znovu sestavila a použila nové proměnné
 
-## Learn More
+📤 Na GitHub:
+Jakákoli změna v repozitáři spustí nové nasazení na:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Vercel (frontend)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Railway (backend, pokud je propojeno)
 
-### Code Splitting
+✅ Validace
+Frontend:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Ověření českého telefonního čísla (9 číslic)
 
-### Analyzing the Bundle Size
+Validní email ve tvaru neco@nekde.tld
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Backend:
 
-### Making a Progressive Web App
+Povinná pole a jednoduchá kontrola vstupů
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+🧪 Testování
+Formulář testuješ jednoduše odesláním dat přes frontend. Data se ukládají do MongoDB (přes Atlas nebo lokální instance).
 
-### Advanced Configuration
+📂 Struktura projektu
+pgsql
+Zkopírovat
+Upravit
+.
+├── backend/
+│   ├── index.js
+│   └── .env
+├── frontend/
+│   ├── public/
+│   └── src/
+├── docker-compose.yml
+└── Dockerfile
+📌 Poznámky
+.env soubor není verzován (ignorován .gitignore)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+V produkci se používají proměnné prostředí nastavené přímo na Vercel a Railway
