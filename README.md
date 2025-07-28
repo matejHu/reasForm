@@ -133,10 +133,3 @@ Frontend i backend poběží v jednom kontejneru.
 - Odešli
 - Data se uloží do MongoDB (např. MongoDB Atlas)
 
----
-
-## ✍️ Autor
-
-Matej Hudym\
-GitHub: [@matejHu](https://github.com/matejHu)
-
