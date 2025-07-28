@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import krajeOkresy from './krajeOkresy'; // předpokládám, že to máš jako JSON nebo objekt
-import MapaKraju from "./components/MapaKraju"; // cesta se přizpůsobí tvému umístění
+import krajeOkresy from './krajeOkresy';
+import MapaKraju from "./components/MapaKraju";
 
 const ChciNabidku = () => {
   const [step, setStep] = useState(1);
@@ -53,6 +53,20 @@ const ChciNabidku = () => {
       phone: formData.phone,
       email: formData.email,
     };
+
+    // Validace e-mailu
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(payload.email)) {
+      alert("Zadejte platný e-mail.");
+      return;
+    }
+
+    // Validace českého čísla (např. +420 123 456 789 nebo 123456789)
+    const phoneRegex = /^(\+420)?\s?\d{3}\s?\d{3}\s?\d{3}$/;
+    if (!phoneRegex.test(payload.phone)) {
+      alert("Zadejte platné české telefonní číslo.");
+      return;
+    }
 
     try {
       const res = await fetch(`${process.env.REACT_APP_API_URL}/lead`, {
